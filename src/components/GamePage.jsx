@@ -127,243 +127,228 @@ export default function GamePage() {
   if (gameStarted) {
     return (
       <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4, md: 6 }, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
-          {/* Problem Area */}
-          <Grid item xs={12} md={8}>
-            <Card
-              elevation={3}
-              sx={{
-                minHeight: { xs: '300px', sm: '350px', md: '400px' },
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
-                borderRadius: { xs: '16px', md: '20px' },
-                border: '2px solid #e0e7ff',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  boxShadow: '0 20px 40px rgba(59, 130, 246, 0.15)',
-                  transform: 'translateY(-2px)',
-                },
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center', width: '100%', p: { xs: 3, sm: 4, md: 6 } }}>
-                <Typography variant="h5" sx={{ mb: { xs: 3, md: 6 }, color: '#1e293b', fontWeight: 600, fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' } }}>
-                  Problem #{problemsSolved + 1}
-                </Typography>
+        {/* Single Combined Card */}
+        <Card
+          elevation={3}
+          sx={{
+            minHeight: { xs: 'auto', md: '500px' },
+            background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
+            borderRadius: { xs: '16px', md: '20px' },
+            border: '2px solid #e0e7ff',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              boxShadow: '0 20px 40px rgba(59, 130, 246, 0.15)',
+              transform: 'translateY(-2px)',
+            },
+          }}
+        >
+          <CardContent sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+            <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+              {/* Problem Area - Takes up most of the space */}
+              <Grid item xs={12} md={8}>
+                <Box sx={{ textAlign: 'center', mb: { xs: 2, md: 3 } }}>
+                  <Typography variant="h6" sx={{ mb: { xs: 2, md: 3 }, color: '#1e293b', fontWeight: 600, fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' } }}>
+                    Problem #{problemsSolved + 1}
+                  </Typography>
 
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
-                    fontWeight: 700,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    mb: { xs: 3, md: 4 },
-                    animation: 'scaleIn 0.5s ease-out',
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
-                </Typography>
-
-                <Box sx={{ mt: { xs: 2, md: 4 } }}>
-                  <TextField
-                    type="number"
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Your answer"
-                    autoFocus
-                    key={`input-${problemsSolved}`}
+                  <Typography
+                    variant="h1"
                     sx={{
-                      width: { xs: '100%', sm: '280px', md: '300px' },
-                      maxWidth: '300px',
-                      '& .MuiOutlinedInput-root': {
-                        fontSize: { xs: '1.5rem', md: '2rem' },
-                        borderRadius: '12px',
-                        backgroundColor: '#ffffff',
-                        transition: 'all 0.3s ease',
-                        minHeight: { xs: '50px', md: 'auto' },
-                        '& input': {
-                          textAlign: 'center',
-                          fontWeight: 600,
-                          padding: { xs: '12px 16px', md: '16px 24px' },
-                        },
-                        '&:hover': {
-                          borderColor: '#3b82f6',
-                          boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)',
-                        },
-                        '&.Mui-focused': {
-                          boxShadow: '0 4px 20px rgba(59, 130, 246, 0.3)',
-                        },
-                      },
-                    }}
-                  />
-                  <Button
-                    onClick={handleSubmitAnswer}
-                    variant="contained"
-                    size="large"
-                    sx={{
-                      display: 'block',
-                      mx: 'auto',
-                      mt: { xs: 2, md: 3 },
-                      px: { xs: 4, md: 6 },
-                      py: { xs: 2, md: 2 },
-                      fontSize: { xs: '1rem', md: '1.2rem' },
-                      fontWeight: 600,
-                      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                      borderRadius: '12px',
-                      boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
-                      transition: 'all 0.3s ease',
-                      minHeight: { xs: '48px', md: 'auto' },
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
-                      },
-                      '&:active': {
-                        transform: 'translateY(0)',
-                      },
+                      fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
+                      fontWeight: 700,
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      mb: { xs: 3, md: 4 },
+                      animation: 'scaleIn 0.5s ease-out',
+                      lineHeight: 1.1,
                     }}
                   >
-                    Submit
-                  </Button>
-                </Box>
+                    {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
+                  </Typography>
 
-                <Snackbar
-                  open={showFeedback}
-                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                >
-                  <Alert
-                    severity={isCorrect ? 'success' : 'error'}
-                    icon={isCorrect ? <CheckCircle /> : <Cancel />}
-                    sx={{
-                      fontSize: { xs: '1rem', md: '1.2rem' },
-                      minWidth: { xs: '280px', md: 'auto' }
-                    }}
-                  >
-                    {isCorrect ? '🎉 Correct! Great job!' : '❌ Not quite. Try again!'}
-                  </Alert>
-                </Snackbar>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Progress Bar */}
-          <Grid item xs={12} md={4}>
-            <Card
-              elevation={3}
-              sx={{
-                position: 'sticky',
-                top: 20,
-                borderRadius: { xs: '16px', md: '20px' },
-                background: 'linear-gradient(135deg, #ffffff 0%, #fef3c7 100%)',
-                border: '2px solid #fde68a',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  boxShadow: '0 20px 40px rgba(251, 191, 36, 0.2)',
-                },
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 4 } }}>
-                <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#1e293b', fontSize: { xs: '1rem', md: '1.25rem' } }}>
-                  Daily Progress
-                </Typography>
-
-                <Box sx={{ position: 'relative', display: 'inline-flex', mb: 3 }}>
-                  <CircularProgress
-                    variant="determinate"
-                    value={progressPercentage}
-                    size={{ xs: 120, md: 150 }}
-                    thickness={5}
-                    sx={{
-                      color: progressPercentage === 100 ? '#22c55e' : '#3b82f6',
-                      filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.5))',
-                      transition: 'all 0.5s ease',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      right: 0,
-                      position: 'absolute',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'column',
-                    }}
-                  >
-                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#1e293b', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
-                      {problemsSolved}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#64748b', fontSize: { xs: '0.875rem', md: '1rem' } }}>
-                      / {dailyGoal}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Typography variant="body1" sx={{ color: '#64748b', mb: 2, fontSize: { xs: '0.875rem', md: '1rem' } }}>
-                  {problemsSolved === 0 && 'Let\'s get started!'}
-                  {problemsSolved > 0 && problemsSolved < dailyGoal && 'Keep going!'}
-                  {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
-                </Typography>
-
-                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
-                  {/* Restart Button - Always visible during game */}
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      setGameStarted(false);
-                      setCurrentProblem(null);
-                      setUserAnswer('');
-                      setProblemsSolved(0);
-                      setShowFeedback(false);
-                      setIsCorrect(false);
-                    }}
-                    sx={{
-                      minHeight: { xs: '44px', md: 'auto' },
-                      fontSize: { xs: '0.875rem', md: '1rem' },
-                      px: { xs: 3, md: 4 },
-                      borderColor: '#64748b',
-                      color: '#64748b',
-                      '&:hover': {
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.05)',
-                        color: '#3b82f6',
-                      },
-                    }}
-                  >
-                    Restart
-                  </Button>
-
-                  {/* Back to Settings Button - Only visible when goal completed */}
-                  {problemsSolved >= dailyGoal && (
-                    <Button
-                      variant="contained"
-                      onClick={() => setGameStarted(false)}
+                  <Box sx={{ mt: { xs: 2, md: 4 } }}>
+                    <TextField
+                      type="number"
+                      value={userAnswer}
+                      onChange={(e) => setUserAnswer(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Your answer"
+                      autoFocus
+                      key={`input-${problemsSolved}`}
                       sx={{
-                        minHeight: { xs: '44px', md: 'auto' },
-                        fontSize: { xs: '0.875rem', md: '1rem' },
-                        px: { xs: 3, md: 4 },
+                        width: { xs: '100%', sm: '280px', md: '300px' },
+                        maxWidth: '300px',
+                        '& .MuiOutlinedInput-root': {
+                          fontSize: { xs: '1.5rem', md: '2rem' },
+                          borderRadius: '12px',
+                          backgroundColor: '#ffffff',
+                          transition: 'all 0.3s ease',
+                          minHeight: { xs: '50px', md: 'auto' },
+                          '& input': {
+                            textAlign: 'center',
+                            fontWeight: 600,
+                            padding: { xs: '12px 16px', md: '16px 24px' },
+                          },
+                          '&:hover': {
+                            borderColor: '#3b82f6',
+                            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)',
+                          },
+                          '&.Mui-focused': {
+                            boxShadow: '0 4px 20px rgba(59, 130, 246, 0.3)',
+                          },
+                        },
+                      }}
+                    />
+                    <Button
+                      onClick={handleSubmitAnswer}
+                      variant="contained"
+                      size="large"
+                      sx={{
+                        display: 'block',
+                        mx: 'auto',
+                        mt: { xs: 2, md: 3 },
+                        px: { xs: 4, md: 6 },
+                        py: { xs: 2, md: 2 },
+                        fontSize: { xs: '1rem', md: '1.2rem' },
+                        fontWeight: 600,
                         background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                        borderRadius: '12px',
+                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                        transition: 'all 0.3s ease',
+                        minHeight: { xs: '48px', md: 'auto' },
                         '&:hover': {
                           background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
+                        },
+                        '&:active': {
+                          transform: 'translateY(0)',
                         },
                       }}
                     >
-                      Back to Settings
+                      Submit
                     </Button>
-                  )}
+                  </Box>
                 </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+              </Grid>
+
+              {/* Progress Bar - Sidebar within the same card */}
+              <Grid item xs={12} md={4}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#1e293b', fontSize: { xs: '1rem', md: '1.25rem' } }}>
+                    Daily Progress
+                  </Typography>
+
+                  <Box sx={{ position: 'relative', display: 'inline-flex', mb: 3 }}>
+                    <CircularProgress
+                      variant="determinate"
+                      value={progressPercentage}
+                      size={{ xs: 100, md: 120 }}
+                      thickness={5}
+                      sx={{
+                        color: progressPercentage === 100 ? '#22c55e' : '#3b82f6',
+                        filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.5))',
+                        transition: 'all 0.5s ease',
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        position: 'absolute',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <Typography variant="h4" sx={{ fontWeight: 700, color: '#1e293b', fontSize: { xs: '1.25rem', md: '2.125rem' } }}>
+                        {problemsSolved}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#64748b', fontSize: { xs: '0.75rem', md: '1rem' } }}>
+                        / {dailyGoal}
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Typography variant="body1" sx={{ color: '#64748b', mb: 2, fontSize: { xs: '0.8rem', md: '1rem' } }}>
+                    {problemsSolved === 0 && 'Let\'s get started!'}
+                    {problemsSolved > 0 && problemsSolved < dailyGoal && 'Keep going!'}
+                    {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
+                  </Typography>
+
+                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
+                    {/* Restart Button - Always visible during game */}
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        setGameStarted(false);
+                        setCurrentProblem(null);
+                        setUserAnswer('');
+                        setProblemsSolved(0);
+                        setShowFeedback(false);
+                        setIsCorrect(false);
+                      }}
+                      sx={{
+                        minHeight: { xs: '40px', md: 'auto' },
+                        fontSize: { xs: '0.8rem', md: '1rem' },
+                        px: { xs: 2, md: 4 },
+                        borderColor: '#64748b',
+                        color: '#64748b',
+                        '&:hover': {
+                          borderColor: '#3b82f6',
+                          backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                          color: '#3b82f6',
+                        },
+                      }}
+                    >
+                      Restart
+                    </Button>
+
+                    {/* Back to Settings Button - Only visible when goal completed */}
+                    {problemsSolved >= dailyGoal && (
+                      <Button
+                        variant="contained"
+                        onClick={() => setGameStarted(false)}
+                        sx={{
+                          minHeight: { xs: '40px', md: 'auto' },
+                          fontSize: { xs: '0.8rem', md: '1rem' },
+                          px: { xs: 2, md: 4 },
+                          background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                          '&:hover': {
+                            background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+                          },
+                        }}
+                      >
+                        Back to Settings
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+
+            {/* Feedback Snackbar - Positioned relative to the single card */}
+            <Snackbar
+              open={showFeedback}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+              <Alert
+                severity={isCorrect ? 'success' : 'error'}
+                icon={isCorrect ? <CheckCircle /> : <Cancel />}
+                sx={{
+                  fontSize: { xs: '1rem', md: '1.2rem' },
+                  minWidth: { xs: '280px', md: 'auto' }
+                }}
+              >
+                {isCorrect ? '🎉 Correct! Great job!' : '❌ Not quite. Try again!'}
+              </Alert>
+            </Snackbar>
+          </CardContent>
+        </Card>
       </Container>
     );
   }
