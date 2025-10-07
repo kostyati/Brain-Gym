@@ -313,19 +313,53 @@ export default function GamePage() {
                   {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
                 </Typography>
 
-                {problemsSolved >= dailyGoal && (
+                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 2 }}>
+                  {/* Restart Button - Always visible during game */}
                   <Button
                     variant="outlined"
-                    onClick={() => setGameStarted(false)}
+                    onClick={() => {
+                      setGameStarted(false);
+                      setCurrentProblem(null);
+                      setUserAnswer('');
+                      setProblemsSolved(0);
+                      setShowFeedback(false);
+                      setIsCorrect(false);
+                    }}
                     sx={{
-                      mt: 2,
                       minHeight: { xs: '44px', md: 'auto' },
-                      fontSize: { xs: '0.875rem', md: '1rem' }
+                      fontSize: { xs: '0.875rem', md: '1rem' },
+                      px: { xs: 3, md: 4 },
+                      borderColor: '#64748b',
+                      color: '#64748b',
+                      '&:hover': {
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                        color: '#3b82f6',
+                      },
                     }}
                   >
-                    Back to Settings
+                    Restart
                   </Button>
-                )}
+
+                  {/* Back to Settings Button - Only visible when goal completed */}
+                  {problemsSolved >= dailyGoal && (
+                    <Button
+                      variant="contained"
+                      onClick={() => setGameStarted(false)}
+                      sx={{
+                        minHeight: { xs: '44px', md: 'auto' },
+                        fontSize: { xs: '0.875rem', md: '1rem' },
+                        px: { xs: 3, md: 4 },
+                        background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                        '&:hover': {
+                          background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+                        },
+                      }}
+                    >
+                      Back to Settings
+                    </Button>
+                  )}
+                </Box>
               </CardContent>
             </Card>
           </Grid>
