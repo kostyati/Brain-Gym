@@ -396,12 +396,14 @@ input[type="number"] {
 }
 
 .game-card {
-  min-height: clamp(400px, 60vh, 500px);
+  min-height: clamp(400px, 60vh, 600px);
   background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
   border-radius: clamp(1rem, 2vw, 1.25rem);
   border: 2px solid #e0e7ff;
   transition: all 0.3s ease;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .game-card:hover {
@@ -410,7 +412,10 @@ input[type="number"] {
 }
 
 .game-card-content {
-  padding: clamp(0.5rem, 3vw, 1rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-problem-section {
@@ -512,7 +517,7 @@ input[type="number"] {
 .game-progress-circle {
   position: relative;
   display: inline-flex;
-  margin-bottom: clamp(0.75rem, 2vw, 0.75rem);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 .game-progress-circle .MuiCircularProgress-root {
@@ -540,25 +545,27 @@ input[type="number"] {
 .game-progress-number {
   font-weight: 700;
   color: #1e293b;
-  font-size: clamp(1.25rem, 3vw, 2.125rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .game-progress-label {
   color: #64748b;
-  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
 }
 
 .game-progress-status {
   color: #64748b;
-  margin-bottom: clamp(0.5rem, 1vw, 0.5rem);
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  line-height: 1.4;
 }
 
 .game-button-group {
   display: flex;
-  gap: clamp(0.5rem, 1vw, 0.5rem);
+  gap: clamp(0.5rem, 1vw, 0.75rem);
   justify-content: center;
-  margin-top: clamp(0.5rem, 1vw, 0.5rem);
+  margin-top: clamp(0.75rem, 1.5vw, 1rem);
+  flex-wrap: wrap;
 }
 
 .game-restart-button {
@@ -740,12 +747,23 @@ input[type="number"] {
 
 @media (min-width: 769px) {
   .game-progress-circle .MuiCircularProgress-root {
-    width: 120px !important;
-    height: 120px !important;
+    width: 140px !important;
+    height: 140px !important;
   }
 
   .setup-daily-goal-card .MuiCircularProgress-root {
     width: 120px !important;
     height: 120px !important;
+  }
+}
+
+/* Large Desktop Optimization */
+@media (min-width: 1200px) {
+  .game-card {
+    min-height: 600px;
+  }
+
+  .game-card-content {
+    padding: 2rem;
   }
 }

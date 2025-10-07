@@ -130,9 +130,9 @@ export default function GamePage() {
         {/* Single Combined Card */}
         <Card elevation={3} className="game-card">
           <CardContent className="game-card-content">
-            <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+            <Grid container spacing={{ xs: 3, sm: 4, md: 4 }}>
               {/* Problem Area - Takes up most of the space */}
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} lg={7}>
                 <Box className="game-problem-section">
                   <Typography variant="h6" className="game-problem-title">
                     Problem #{problemsSolved + 1}
@@ -166,7 +166,7 @@ export default function GamePage() {
               </Grid>
 
               {/* Progress Bar - Sidebar within the same card */}
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} lg={5}>
                 <Box className="game-progress-section">
                   <Typography variant="h6" className="game-progress-title">
                     Daily Progress
@@ -178,11 +178,11 @@ export default function GamePage() {
                     <CircularProgress
                       variant="determinate"
                       value={progressPercentage}
-                      size={{ xs: 100, md: 120 }}
-                      thickness={5}
+                      size={{ xs: 100, md: 140 }}
+                      thickness={6}
                     />
                     <Box className="game-progress-text">
-                      <Typography variant="h4" className="game-progress-number">
+                      <Typography variant="h3" className="game-progress-number">
                         {problemsSolved}
                       </Typography>
                       <Typography variant="body2" className="game-progress-label">
