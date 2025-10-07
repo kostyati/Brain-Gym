@@ -126,20 +126,20 @@ export default function GamePage() {
 
   if (gameStarted) {
     return (
-      <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
-        <Grid container spacing={4}>
+      <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4, md: 6 }, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
           {/* Problem Area */}
           <Grid item xs={12} md={8}>
             <Card
               elevation={3}
               sx={{
-                minHeight: '400px',
+                minHeight: { xs: '300px', sm: '350px', md: '400px' },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
-                borderRadius: '20px',
+                borderRadius: { xs: '16px', md: '20px' },
                 border: '2px solid #e0e7ff',
                 transition: 'all 0.3s ease',
                 '&:hover': {
@@ -148,27 +148,28 @@ export default function GamePage() {
                 },
               }}
             >
-              <CardContent sx={{ textAlign: 'center', width: '100%', p: 6 }}>
-                <Typography variant="h3" sx={{ mb: 6, color: '#1e293b', fontWeight: 600 }}>
+              <CardContent sx={{ textAlign: 'center', width: '100%', p: { xs: 3, sm: 4, md: 6 } }}>
+                <Typography variant="h5" sx={{ mb: { xs: 3, md: 6 }, color: '#1e293b', fontWeight: 600, fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' } }}>
                   Problem #{problemsSolved + 1}
                 </Typography>
-                
+
                 <Typography
                   variant="h1"
                   sx={{
-                    fontSize: '4rem',
+                    fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
                     fontWeight: 700,
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    mb: 4,
+                    mb: { xs: 3, md: 4 },
                     animation: 'scaleIn 0.5s ease-out',
+                    lineHeight: 1.1,
                   }}
                 >
                   {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
                 </Typography>
 
-                <Box sx={{ mt: 4 }}>
+                <Box sx={{ mt: { xs: 2, md: 4 } }}>
                   <TextField
                     type="number"
                     value={userAnswer}
@@ -178,15 +179,18 @@ export default function GamePage() {
                     autoFocus
                     key={`input-${problemsSolved}`}
                     sx={{
-                      width: '300px',
+                      width: { xs: '100%', sm: '280px', md: '300px' },
+                      maxWidth: '300px',
                       '& .MuiOutlinedInput-root': {
-                        fontSize: '2rem',
+                        fontSize: { xs: '1.5rem', md: '2rem' },
                         borderRadius: '12px',
                         backgroundColor: '#ffffff',
                         transition: 'all 0.3s ease',
+                        minHeight: { xs: '50px', md: 'auto' },
                         '& input': {
                           textAlign: 'center',
                           fontWeight: 600,
+                          padding: { xs: '12px 16px', md: '16px 24px' },
                         },
                         '&:hover': {
                           borderColor: '#3b82f6',
@@ -205,16 +209,17 @@ export default function GamePage() {
                     sx={{
                       display: 'block',
                       mx: 'auto',
-                      mt: 3,
-                      px: 6,
-                      py: 2,
-                      fontSize: '1.2rem',
+                      mt: { xs: 2, md: 3 },
+                      px: { xs: 4, md: 6 },
+                      py: { xs: 2, md: 2 },
+                      fontSize: { xs: '1rem', md: '1.2rem' },
                       fontWeight: 600,
                       background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
                       borderRadius: '12px',
                       boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
                       transition: 'all 0.3s ease',
-                      '&:hover': { 
+                      minHeight: { xs: '48px', md: 'auto' },
+                      '&:hover': {
                         background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
                         transform: 'translateY(-2px)',
                         boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
@@ -235,7 +240,10 @@ export default function GamePage() {
                   <Alert
                     severity={isCorrect ? 'success' : 'error'}
                     icon={isCorrect ? <CheckCircle /> : <Cancel />}
-                    sx={{ fontSize: '1.2rem' }}
+                    sx={{
+                      fontSize: { xs: '1rem', md: '1.2rem' },
+                      minWidth: { xs: '280px', md: 'auto' }
+                    }}
                   >
                     {isCorrect ? '🎉 Correct! Great job!' : '❌ Not quite. Try again!'}
                   </Alert>
@@ -246,12 +254,12 @@ export default function GamePage() {
 
           {/* Progress Bar */}
           <Grid item xs={12} md={4}>
-            <Card 
-              elevation={3} 
-              sx={{ 
-                position: 'sticky', 
+            <Card
+              elevation={3}
+              sx={{
+                position: 'sticky',
                 top: 20,
-                borderRadius: '20px',
+                borderRadius: { xs: '16px', md: '20px' },
                 background: 'linear-gradient(135deg, #ffffff 0%, #fef3c7 100%)',
                 border: '2px solid #fde68a',
                 transition: 'all 0.3s ease',
@@ -260,16 +268,16 @@ export default function GamePage() {
                 },
               }}
             >
-              <CardContent sx={{ textAlign: 'center', p: 4 }}>
-                <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#1e293b' }}>
+              <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 4 } }}>
+                <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#1e293b', fontSize: { xs: '1rem', md: '1.25rem' } }}>
                   Daily Progress
                 </Typography>
-                
+
                 <Box sx={{ position: 'relative', display: 'inline-flex', mb: 3 }}>
                   <CircularProgress
                     variant="determinate"
                     value={progressPercentage}
-                    size={150}
+                    size={{ xs: 120, md: 150 }}
                     thickness={5}
                     sx={{
                       color: progressPercentage === 100 ? '#22c55e' : '#3b82f6',
@@ -290,16 +298,16 @@ export default function GamePage() {
                       flexDirection: 'column',
                     }}
                   >
-                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#1e293b' }}>
+                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#1e293b', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
                       {problemsSolved}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#64748b' }}>
+                    <Typography variant="body2" sx={{ color: '#64748b', fontSize: { xs: '0.875rem', md: '1rem' } }}>
                       / {dailyGoal}
                     </Typography>
                   </Box>
                 </Box>
 
-                <Typography variant="body1" sx={{ color: '#64748b', mb: 2 }}>
+                <Typography variant="body1" sx={{ color: '#64748b', mb: 2, fontSize: { xs: '0.875rem', md: '1rem' } }}>
                   {problemsSolved === 0 && 'Let\'s get started!'}
                   {problemsSolved > 0 && problemsSolved < dailyGoal && 'Keep going!'}
                   {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
@@ -309,7 +317,11 @@ export default function GamePage() {
                   <Button
                     variant="outlined"
                     onClick={() => setGameStarted(false)}
-                    sx={{ mt: 2 }}
+                    sx={{
+                      mt: 2,
+                      minHeight: { xs: '44px', md: 'auto' },
+                      fontSize: { xs: '0.875rem', md: '1rem' }
+                    }}
                   >
                     Back to Settings
                   </Button>
@@ -323,27 +335,28 @@ export default function GamePage() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
-      <Typography 
-        variant="h3" 
-        sx={{ 
-          mb: 4, 
-          fontWeight: 700, 
+    <Container maxWidth="lg" sx={{ py: { xs: 3, sm: 4, md: 6 }, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
+      <Typography
+        variant="h3"
+        sx={{
+          mb: { xs: 3, md: 4 },
+          fontWeight: 700,
           textAlign: 'center',
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
+          fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
         }}
       >
         Math Practice Game
       </Typography>
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: { xs: 3, md: 4 } }}>
         {Object.keys(settings).map((operation) => (
           <Grid item xs={12} sm={6} md={3} key={operation}>
-            <Card 
-              elevation={2} 
-              sx={{ 
+            <Card
+              elevation={2}
+              sx={{
                 height: '100%',
                 borderRadius: '16px',
                 transition: 'all 0.3s ease',
@@ -355,7 +368,7 @@ export default function GamePage() {
                 },
               }}
             >
-              <CardContent>
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
                   <FormControlLabel
                     control={
@@ -365,21 +378,26 @@ export default function GamePage() {
                         sx={{
                           color: '#3b82f6',
                           '&.Mui-checked': { color: '#3b82f6' },
+                          transform: { xs: 'scale(0.9)', md: 'scale(1)' },
                         }}
                       />
                     }
                     label={
                       <Typography
-                        variant="h5"
-                        sx={{ fontWeight: 600, color: '#3b82f6' }}
+                        variant="h6"
+                        sx={{
+                          fontWeight: 600,
+                          color: '#3b82f6',
+                          fontSize: { xs: '1rem', md: '1.25rem' }
+                        }}
                       >
                         {operation}
                       </Typography>
                     }
                   />
                 </Box>
-                
-                <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+
+                <Box sx={{ display: 'flex', gap: { xs: 1, md: 2 }, alignItems: 'center' }}>
                   <TextField
                     label="Min"
                     type="number"
@@ -387,7 +405,15 @@ export default function GamePage() {
                     value={settings[operation].min}
                     onChange={(e) => handleSettingChange(operation, 'min', e.target.value)}
                     disabled={!settings[operation].enabled}
-                    sx={{ flex: 1 }}
+                    sx={{
+                      flex: 1,
+                      '& .MuiInputLabel-root': {
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      }
+                    }}
                   />
                   <TextField
                     label="Max"
@@ -396,11 +422,28 @@ export default function GamePage() {
                     value={settings[operation].max}
                     onChange={(e) => handleSettingChange(operation, 'max', e.target.value)}
                     disabled={!settings[operation].enabled}
-                    sx={{ flex: 1 }}
+                    sx={{
+                      flex: 1,
+                      '& .MuiInputLabel-root': {
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      }
+                    }}
                   />
                 </Box>
-                
-                <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#64748b', textAlign: 'center' }}>
+
+                <Typography
+                  variant="caption"
+                  sx={{
+                    display: 'block',
+                    mt: 1,
+                    color: '#64748b',
+                    textAlign: 'center',
+                    fontSize: { xs: '0.75rem', md: '0.875rem' }
+                  }}
+                >
                   Range: [{settings[operation].min} - {settings[operation].max}]
                 </Typography>
               </CardContent>
@@ -409,16 +452,17 @@ export default function GamePage() {
         ))}
       </Grid>
 
-      <Box sx={{ textAlign: 'center', mt: 6 }}>
+      <Box sx={{ textAlign: 'center', mt: { xs: 4, md: 6 } }}>
         <Card
           elevation={3}
           sx={{
             display: 'inline-block',
-            p: 4,
+            p: { xs: 3, md: 4 },
             background: 'linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)',
-            borderRadius: '20px',
+            borderRadius: { xs: '16px', md: '20px' },
             border: '2px solid #bfdbfe',
             transition: 'all 0.3s ease',
+            maxWidth: { xs: '100%', md: 'auto' },
             '&:hover': {
               boxShadow: '0 20px 40px rgba(59, 130, 246, 0.2)',
               transform: 'translateY(-5px)',
@@ -429,7 +473,7 @@ export default function GamePage() {
             <CircularProgress
               variant="determinate"
               value={progressPercentage}
-              size={120}
+              size={{ xs: 100, md: 120 }}
               thickness={5}
               sx={{ color: '#3b82f6' }}
             />
@@ -446,32 +490,53 @@ export default function GamePage() {
                 flexDirection: 'column',
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e293b' }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 700,
+                  color: '#1e293b',
+                  fontSize: { xs: '1.25rem', md: '1.875rem' }
+                }}
+              >
                 {problemsSolved}
               </Typography>
-              <Typography variant="body2" sx={{ color: '#64748b' }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: '#64748b',
+                  fontSize: { xs: '0.75rem', md: '1rem' }
+                }}
+              >
                 / {dailyGoal}
               </Typography>
             </Box>
           </Box>
-          <Typography variant="h6" sx={{ mb: 3, color: '#64748b' }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 3,
+              color: '#64748b',
+              fontSize: { xs: '1rem', md: '1.25rem' }
+            }}
+          >
             Daily Goal
           </Typography>
-          
+
           <Button
             variant="contained"
             size="large"
             onClick={handleStartPractice}
             sx={{
-              px: 6,
-              py: 2,
-              fontSize: '1.2rem',
+              px: { xs: 4, md: 6 },
+              py: { xs: 2, md: 2 },
+              fontSize: { xs: '1rem', md: '1.2rem' },
               fontWeight: 600,
               background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
               borderRadius: '12px',
               boxShadow: '0 8px 16px rgba(59, 130, 246, 0.3)',
               transition: 'all 0.3s ease',
-              '&:hover': { 
+              minHeight: { xs: '48px', md: 'auto' },
+              '&:hover': {
                 background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
                 transform: 'translateY(-3px)',
                 boxShadow: '0 12px 24px rgba(59, 130, 246, 0.4)',

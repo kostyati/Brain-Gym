@@ -38,8 +38,8 @@ export default function Footer() {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: { xs: "center", md: "flex-start" },
-            gap: 4,
-            mb: 4,
+            gap: { xs: 3, md: 4 },
+            mb: { xs: 3, md: 4 },
           }}
         >
           {/* Brand Section */}
@@ -47,6 +47,7 @@ export default function Footer() {
             sx={{
               textAlign: { xs: "center", md: "left" },
               maxWidth: "400px",
+              width: { xs: '100%', md: 'auto' },
             }}
           >
             <Typography
@@ -57,7 +58,7 @@ export default function Footer() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 mb: 1,
-                fontSize: "1.5rem",
+                fontSize: { xs: "1.25rem", md: "1.5rem" },
               }}
             >
               Brain Gym
@@ -67,9 +68,10 @@ export default function Footer() {
               sx={{
                 color: "#94a3b8",
                 lineHeight: 1.7,
+                fontSize: { xs: '0.875rem', md: '1rem' },
               }}
             >
-              Master mathematics through interactive practice and personalized learning. 
+              Master mathematics through interactive practice and personalized learning.
               Build confidence with every problem solved.
             </Typography>
           </Box>
@@ -86,6 +88,7 @@ export default function Footer() {
                 fontWeight: 600,
                 mb: 2,
                 color: "#f1f5f9",
+                fontSize: { xs: '1rem', md: '1.125rem' },
               }}
             >
               Resources
@@ -98,7 +101,8 @@ export default function Footer() {
                   color: "#94a3b8",
                   transition: "all 0.3s ease",
                   position: 'relative',
-                  "&:hover": { 
+                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  "&:hover": {
                     color: "#3b82f6",
                     paddingLeft: '8px',
                   },
@@ -124,7 +128,8 @@ export default function Footer() {
                   color: "#94a3b8",
                   transition: "all 0.3s ease",
                   position: 'relative',
-                  "&:hover": { 
+                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  "&:hover": {
                     color: "#3b82f6",
                     paddingLeft: '8px',
                   },
@@ -150,6 +155,8 @@ export default function Footer() {
           <Box
             sx={{
               textAlign: { xs: "center", md: "left" },
+              width: { xs: '100%', md: 'auto' },
+              maxWidth: { xs: '280px', md: 'none' },
             }}
           >
             <Typography
@@ -158,6 +165,7 @@ export default function Footer() {
                 fontWeight: 600,
                 mb: 2,
                 color: "#f1f5f9",
+                fontSize: { xs: '1rem', md: '1.125rem' },
               }}
             >
               Support Us
@@ -173,13 +181,18 @@ export default function Footer() {
                 color: "white",
                 textDecoration: "none",
                 borderRadius: "10px",
-                padding: "12px 28px",
-                fontSize: "14px",
+                padding: { xs: "10px 20px", md: "12px 28px" },
+                fontSize: { xs: "13px", md: "14px" },
                 fontWeight: 600,
                 boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
                 transition: "all 0.3s ease",
                 position: 'relative',
                 overflow: 'hidden',
+                width: { xs: '100%', md: 'auto' },
+                minHeight: { xs: '44px', md: 'auto' },
+                display: { xs: 'flex', md: 'inline-block' },
+                alignItems: { xs: 'center', md: 'auto' },
+                justifyContent: { xs: 'center', md: 'auto' },
                 "&:before": {
                   content: '""',
                   position: 'absolute',
@@ -211,6 +224,7 @@ export default function Footer() {
                 display: "block",
                 mt: 1,
                 color: "#64748b",
+                fontSize: { xs: '0.75rem', md: '0.875rem' },
               }}
             >
               Help keep Brain Gym free
@@ -227,7 +241,7 @@ export default function Footer() {
             flexDirection: { xs: "column", sm: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap: 2,
+            gap: { xs: 2, sm: 2 },
           }}
         >
           {/* Copyright */}
@@ -235,13 +249,15 @@ export default function Footer() {
             variant="body2"
             sx={{
               color: "#94a3b8",
-              fontSize: "0.875rem",
+              fontSize: { xs: "0.75rem", md: "0.875rem" },
+              textAlign: { xs: "center", sm: "left" },
+              lineHeight: 1.5,
             }}
           >
             © {currentYear} Brain Gym. Built with{" "}
             <FavoriteIcon
               sx={{
-                fontSize: 14,
+                fontSize: { xs: 12, md: 14 },
                 verticalAlign: "middle",
                 color: "#ef4444",
                 mx: 0.5,
@@ -251,7 +267,7 @@ export default function Footer() {
           </Typography>
 
           {/* Social Links */}
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: { xs: 0.5, md: 1 }, justifyContent: { xs: "center", sm: "flex-end" } }}>
             <IconButton
               component={Link}
               href="https://github.com/yourusername"
@@ -261,6 +277,8 @@ export default function Footer() {
               sx={{
                 color: "#94a3b8",
                 transition: "all 0.3s ease",
+                minWidth: { xs: "40px", md: "auto" },
+                minHeight: { xs: "40px", md: "auto" },
                 "&:hover": {
                   color: "#3b82f6",
                   backgroundColor: "rgba(59, 130, 246, 0.15)",
@@ -269,7 +287,7 @@ export default function Footer() {
                 },
               }}
             >
-              <GitHubIcon />
+              <GitHubIcon sx={{ fontSize: { xs: '1.25rem', md: '1.5rem' } }} />
             </IconButton>
             <IconButton
               component={Link}
@@ -278,6 +296,8 @@ export default function Footer() {
               sx={{
                 color: "#94a3b8",
                 transition: "all 0.3s ease",
+                minWidth: { xs: "40px", md: "auto" },
+                minHeight: { xs: "40px", md: "auto" },
                 "&:hover": {
                   color: "#3b82f6",
                   backgroundColor: "rgba(59, 130, 246, 0.15)",
@@ -286,7 +306,7 @@ export default function Footer() {
                 },
               }}
             >
-              <EmailIcon />
+              <EmailIcon sx={{ fontSize: { xs: '1.25rem', md: '1.5rem' } }} />
             </IconButton>
           </Box>
         </Box>

@@ -302,7 +302,13 @@ input[type="number"] {
 }
 
 /* Responsive Typography */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
   :root {
     font-size: 14px;
   }
