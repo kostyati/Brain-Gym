@@ -385,25 +385,26 @@ export default function GamePage() {
         Math Practice Game
       </Typography>
 
-      <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: { xs: 3, md: 4 } }}>
+      <Grid container spacing={{ xs: 1.5, sm: 3 }} sx={{ mb: { xs: 2, md: 4 } }}>
         {Object.keys(settings).map((operation) => (
-          <Grid item xs={12} sm={6} md={3} key={operation}>
+          <Grid item xs={6} sm={6} md={3} key={operation}>
             <Card
               elevation={2}
               sx={{
                 height: '100%',
-                borderRadius: '16px',
+                minHeight: { xs: 'auto', md: 'auto' },
+                borderRadius: { xs: '12px', md: '16px' },
                 transition: 'all 0.3s ease',
                 border: '2px solid transparent',
                 '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: '0 12px 24px rgba(59, 130, 246, 0.2)',
+                  transform: { xs: 'translateY(-2px)', md: 'translateY(-5px)' },
+                  boxShadow: { xs: '0 8px 16px rgba(59, 130, 246, 0.15)', md: '0 12px 24px rgba(59, 130, 246, 0.2)' },
                   borderColor: '#3b82f6',
                 },
               }}
             >
-              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+              <CardContent sx={{ p: { xs: 1.5, md: 3 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: { xs: 1, md: 2 } }}>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -412,7 +413,8 @@ export default function GamePage() {
                         sx={{
                           color: '#3b82f6',
                           '&.Mui-checked': { color: '#3b82f6' },
-                          transform: { xs: 'scale(0.9)', md: 'scale(1)' },
+                          transform: { xs: 'scale(0.8)', md: 'scale(1)' },
+                          py: { xs: 0.5, md: 1 },
                         }}
                       />
                     }
@@ -422,7 +424,7 @@ export default function GamePage() {
                         sx={{
                           fontWeight: 600,
                           color: '#3b82f6',
-                          fontSize: { xs: '1rem', md: '1.25rem' }
+                          fontSize: { xs: '0.9rem', md: '1.25rem' }
                         }}
                       >
                         {operation}
@@ -431,7 +433,7 @@ export default function GamePage() {
                   />
                 </Box>
 
-                <Box sx={{ display: 'flex', gap: { xs: 1, md: 2 }, alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', gap: { xs: 0.5, md: 2 }, alignItems: 'center' }}>
                   <TextField
                     label="Min"
                     type="number"
@@ -442,10 +444,11 @@ export default function GamePage() {
                     sx={{
                       flex: 1,
                       '& .MuiInputLabel-root': {
-                        fontSize: { xs: '0.875rem', md: '1rem' }
+                        fontSize: { xs: '0.75rem', md: '1rem' }
                       },
                       '& .MuiOutlinedInput-root': {
-                        fontSize: { xs: '0.875rem', md: '1rem' }
+                        fontSize: { xs: '0.75rem', md: '1rem' },
+                        minHeight: { xs: '32px', md: 'auto' },
                       }
                     }}
                   />
@@ -459,10 +462,11 @@ export default function GamePage() {
                     sx={{
                       flex: 1,
                       '& .MuiInputLabel-root': {
-                        fontSize: { xs: '0.875rem', md: '1rem' }
+                        fontSize: { xs: '0.75rem', md: '1rem' }
                       },
                       '& .MuiOutlinedInput-root': {
-                        fontSize: { xs: '0.875rem', md: '1rem' }
+                        fontSize: { xs: '0.75rem', md: '1rem' },
+                        minHeight: { xs: '32px', md: 'auto' },
                       }
                     }}
                   />
@@ -472,10 +476,11 @@ export default function GamePage() {
                   variant="caption"
                   sx={{
                     display: 'block',
-                    mt: 1,
+                    mt: { xs: 0.5, md: 1 },
                     color: '#64748b',
                     textAlign: 'center',
-                    fontSize: { xs: '0.75rem', md: '0.875rem' }
+                    fontSize: { xs: '0.65rem', md: '0.875rem' },
+                    lineHeight: { xs: 1.2, md: 1.4 }
                   }}
                 >
                   Range: [{settings[operation].min} - {settings[operation].max}]
@@ -486,14 +491,14 @@ export default function GamePage() {
         ))}
       </Grid>
 
-      <Box sx={{ textAlign: 'center', mt: { xs: 4, md: 6 } }}>
+      <Box sx={{ textAlign: 'center', mt: { xs: 2, md: 6 } }}>
         <Card
           elevation={3}
           sx={{
             display: 'inline-block',
-            p: { xs: 3, md: 4 },
+            p: { xs: 2, md: 4 },
             background: 'linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)',
-            borderRadius: { xs: '16px', md: '20px' },
+            borderRadius: { xs: '12px', md: '20px' },
             border: '2px solid #bfdbfe',
             transition: 'all 0.3s ease',
             maxWidth: { xs: '100%', md: 'auto' },
@@ -503,11 +508,11 @@ export default function GamePage() {
             },
           }}
         >
-          <Box sx={{ mb: 3, position: 'relative', display: 'inline-flex' }}>
+          <Box sx={{ mb: { xs: 2, md: 3 }, position: 'relative', display: 'inline-flex' }}>
             <CircularProgress
               variant="determinate"
               value={progressPercentage}
-              size={{ xs: 100, md: 120 }}
+              size={{ xs: 80, md: 120 }}
               thickness={5}
               sx={{ color: '#3b82f6' }}
             />
@@ -529,7 +534,7 @@ export default function GamePage() {
                 sx={{
                   fontWeight: 700,
                   color: '#1e293b',
-                  fontSize: { xs: '1.25rem', md: '1.875rem' }
+                  fontSize: { xs: '1rem', md: '1.875rem' }
                 }}
               >
                 {problemsSolved}
@@ -538,7 +543,7 @@ export default function GamePage() {
                 variant="body2"
                 sx={{
                   color: '#64748b',
-                  fontSize: { xs: '0.75rem', md: '1rem' }
+                  fontSize: { xs: '0.7rem', md: '1rem' }
                 }}
               >
                 / {dailyGoal}
@@ -548,9 +553,9 @@ export default function GamePage() {
           <Typography
             variant="h6"
             sx={{
-              mb: 3,
+              mb: { xs: 2, md: 3 },
               color: '#64748b',
-              fontSize: { xs: '1rem', md: '1.25rem' }
+              fontSize: { xs: '0.9rem', md: '1.25rem' }
             }}
           >
             Daily Goal
@@ -561,15 +566,15 @@ export default function GamePage() {
             size="large"
             onClick={handleStartPractice}
             sx={{
-              px: { xs: 4, md: 6 },
-              py: { xs: 2, md: 2 },
-              fontSize: { xs: '1rem', md: '1.2rem' },
+              px: { xs: 3, md: 6 },
+              py: { xs: 1.5, md: 2 },
+              fontSize: { xs: '0.9rem', md: '1.2rem' },
               fontWeight: 600,
               background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
               borderRadius: '12px',
               boxShadow: '0 8px 16px rgba(59, 130, 246, 0.3)',
               transition: 'all 0.3s ease',
-              minHeight: { xs: '48px', md: 'auto' },
+              minHeight: { xs: '44px', md: 'auto' },
               '&:hover': {
                 background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
                 transform: 'translateY(-3px)',
