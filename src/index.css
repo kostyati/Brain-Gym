@@ -386,6 +386,32 @@ input[type="number"] {
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Make inputs larger on touch devices */
+  .game-input-field .MuiOutlinedInput-root input {
+    padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 30px) !important;
+    font-size: clamp(1.8rem, 5vw, 2.2rem) !important;
+  }
+
+  /* Larger buttons for touch */
+  .game-submit-button,
+  .game-restart-button,
+  .game-back-button {
+    min-height: clamp(56px, 8vw, auto) !important;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem) !important;
+    font-size: clamp(1.2rem, 3vw, 1.4rem) !important;
+  }
+
+  /* Ensure checkboxes are touchable */
+  .MuiCheckbox-root {
+    padding: clamp(8px, 2vw, 12px) !important;
+  }
+
+  .MuiButton-root {
+    min-height: 44px !important;
+    padding-top: clamp(8px, 2vw, 12px) !important;
+    padding-bottom: clamp(8px, 2vw, 12px) !important;
+  }
 }
 
 /* Game Page Styles */
@@ -434,7 +460,7 @@ input[type="number"] {
   margin-bottom: clamp(0.75rem, 3vw, 1rem);
   animation: scaleIn 0.5s ease-out;
   line-height: 1.1;
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(1.8rem, 8vw, 4rem);
   font-weight: 700;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;

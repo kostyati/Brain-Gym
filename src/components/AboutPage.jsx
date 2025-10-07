@@ -36,8 +36,9 @@ export default function AboutPage() {
             fontSize: { xs: '0.9rem', sm: '1rem' }
           }}
         >
-          Welcome to Brain Gym Math - your interactive platform for mastering mathematics through
-          daily practice and personalized learning experiences.
+          Welcome to Brain Gym Math! Sharpen your arithmetic skills with our interactive practice platform.
+          Whether you're a student looking to build confidence, a parent helping with homework, or someone who wants to keep their mind agile.
+          Our adaptive math exercises make learning engaging for all ages.
         </Typography>
 
         <Typography
@@ -53,7 +54,7 @@ export default function AboutPage() {
             fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
           }}
         >
-          🎯 Our Mission
+          🎯 Why Practice Matters
         </Typography>
         <Typography
           variant="body1"
@@ -64,8 +65,8 @@ export default function AboutPage() {
             fontSize: { xs: '0.9rem', sm: '1rem' }
           }}
         >
-          We believe that consistent practice is the key to mathematical proficiency. Our platform
-          helps students build confidence and skills through engaging, customizable practice sessions.
+          Mathematics is like a muscle—it grows stronger with regular exercise. Daily practice improves number sense,
+          mental calculation speed, and mathematical fluency. Research shows that students who practice consistently perform better in math overall.
         </Typography>
 
         <Typography
@@ -81,7 +82,7 @@ export default function AboutPage() {
             fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
           }}
         >
-          ✨ Features
+          ✨ Key Features
         </Typography>
         <Box
           component="ul"
@@ -111,11 +112,94 @@ export default function AboutPage() {
             },
           }}
         >
-          <li>Customizable difficulty levels for each operation</li>
-          <li>Daily practice goals to build consistency</li>
-          <li>Instant feedback on answers</li>
-          <li>Progress tracking</li>
-          <li>Free to use for everyone</li>
+          <li><strong>Addition, Subtraction, Multiplication & Division:</strong> Practice all four operations</li>
+          <li><strong>Customizable Ranges:</strong> Set difficulty levels from 1-100 or higher</li>
+          <li><strong>Daily Goal Tracking:</strong> Complete 20 problems daily to build consistency</li>
+          <li><strong>Instant Feedback:</strong> Immediate correction with positive reinforcement</li>
+          <li><strong>Progress Persistence:</strong> Your settings and daily progress are saved automatically</li>
+          <li><strong>Mobile Optimized:</strong> Practice comfortably on phones, tablets, and computers</li>
+          <li><strong>Keyboard or Touch:</strong> Use Enter key or tap Submit for quick answering</li>
+        </Box>
+
+        <Typography
+          variant="h5"
+          sx={{
+            mt: { xs: 3, md: 4 },
+            mb: { xs: 1.5, md: 2 },
+            fontWeight: 600,
+            color: "#3b82f6",
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+          }}
+        >
+          📱 How to Use Brain Gym
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            mb: { xs: 2, md: 3 },
+            lineHeight: 1.8,
+            color: "#475569",
+            fontSize: { xs: '0.9rem', sm: '1rem' }
+          }}
+        >
+          <strong>1. Customize:</strong> Choose which operations to practice and set difficulty ranges.<br />
+          <strong>2. Start Practicing:</strong> Click "Start Daily Practice" to begin.<br />
+          <strong>3. Solve Problems:</strong> Work through the math problems that appear.<br />
+          <strong>4. Get Feedback:</strong> See immediate feedback (✓ for correct, ✗ for try again).<br />
+          <strong>5. Track Progress:</strong> Monitor your daily goal completion on the progress circle.<br />
+          <strong>6. Restart Anytime:</strong> Use the Restart button to reset the session.
+        </Typography>
+
+        <Typography
+          variant="h5"
+          sx={{
+            mt: { xs: 3, md: 4 },
+            mb: { xs: 1.5, md: 2 },
+            fontWeight: 600,
+            color: "#3b82f6",
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+          }}
+        >
+          🎓 Educational Benefits
+        </Typography>
+        <Box
+          component="ul"
+          sx={{
+            color: "#475569",
+            lineHeight: { xs: 2, md: 2.5 },
+            listStyle: 'none',
+            paddingLeft: 0,
+            fontSize: { xs: '0.9rem', sm: '1rem' },
+            '& li': {
+              paddingLeft: { xs: '25px', md: '30px' },
+              position: 'relative',
+              transition: 'all 0.3s ease',
+              marginBottom: { xs: '8px', md: '12px' },
+              '&:before': {
+                content: '"🎓"',
+                position: 'absolute',
+                left: 0,
+                fontSize: { xs: '1rem', md: '1.2rem' },
+              },
+              '&:hover': {
+                color: '#3b82f6',
+                paddingLeft: { xs: '30px', md: '35px' },
+              },
+            },
+          }}
+        >
+          <li>Improve calculation speed and accuracy</li>
+          <li>Build mental math abilities</li>
+          <li>Develop number sense and pattern recognition</li>
+          <li>Strengthen confidence with regular practice</li>
+          <li>Prepare for standardized tests and math competitions</li>
+          <li>Support homework and classroom learning</li>
         </Box>
 
         <Box

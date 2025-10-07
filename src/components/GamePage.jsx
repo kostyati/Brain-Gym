@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -31,6 +31,47 @@ export default function GamePage() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const dailyGoal = 20;
+
+  // Load saved data on component mount
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('brainGymSettings');
+    const savedProgress = localStorage.getItem('brainGymProgress');
+    const savedDate = localStorage.getItem('brainGymDate');
+    const today = new Date().toDateString();
+
+    if (savedSettings) {
+      try {
+        setSettings(JSON.parse(savedSettings));
+      } catch (e) {
+        console.warn('Failed to load settings from localStorage');
+      }
+    }
+
+    if (savedDate === today && savedProgress) {
+      try {
+        const progress = parseInt(savedProgress, 10);
+        setProblemsSolved(progress);
+      } catch (e) {
+        console.warn('Failed to load progress from localStorage');
+      }
+    } else {
+      // Reset progress for new day
+      setProblemsSolved(0);
+      localStorage.setItem('brainGymProgress', '0');
+      localStorage.setItem('brainGymDate', today);
+    }
+  }, []);
+
+  // Save settings when changed
+  useEffect(() => {
+    localStorage.setItem('brainGymSettings', JSON.stringify(settings));
+  }, [settings]);
+
+  // Save progress when changed
+  useEffect(() => {
+    localStorage.setItem('brainGymProgress', problemsSolved.toString());
+    localStorage.setItem('brainGymDate', new Date().toDateString());
+  }, [problemsSolved]);
 
   const generateProblem = () => {
     const operations = Object.keys(settings).filter(op => settings[op].enabled);
@@ -132,11 +173,19 @@ export default function GamePage() {
           <CardContent className="game-card-content">
             <Grid container spacing={{ xs: 3, sm: 4, md: 4 }}>
               {/* Problem Area - Takes up most of the space */}
-              <Grid item xs={12} lg={7}>
-                <Box className="game-problem-section">
-                  <Typography variant="h1" className="game-math-problem">
+            <Grid item xs={12} lg={7}>
+                <Box className="game-problem-section" role="main" aria-label="Math problem section">
+                  <Typography
+                    variant="h1"
+                    className="game-math-problem"
+                    aria-live="polite"
+                    aria-describedby="problem-description"
+                  >
                     {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
                   </Typography>
+                  <Box id="problem-description" className="sr-only">
+                    Math problem: {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} equals what?
+                  </Box>
 
                   <Box className="game-input-section">
                     <TextField
@@ -148,12 +197,20 @@ export default function GamePage() {
                       autoFocus
                       key={`input-${problemsSolved}`}
                       className="game-input-field"
+                      inputProps={{
+                        'aria-label': 'Enter your answer',
+                        'aria-describedby': 'input-help'
+                      }}
                     />
+                    <Box id="input-help" className="sr-only">
+                      Input field for math problem answer. Press Enter or tap Submit button to check your answer.
+                    </Box>
                     <Button
                       onClick={handleSubmitAnswer}
                       variant="contained"
                       size="large"
                       className="game-submit-button"
+                      aria-label="Submit answer"
                     >
                       Submit
                     </Button>
