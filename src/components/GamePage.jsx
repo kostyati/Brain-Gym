@@ -126,7 +126,7 @@ export default function GamePage() {
 
   if (gameStarted) {
     return (
-      <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)' }}>
+      <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
         <Grid container spacing={4}>
           {/* Problem Area */}
           <Grid item xs={12} md={8}>
@@ -138,7 +138,14 @@ export default function GamePage() {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: '#f8fafc',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)',
+                borderRadius: '20px',
+                border: '2px solid #e0e7ff',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  boxShadow: '0 20px 40px rgba(59, 130, 246, 0.15)',
+                  transform: 'translateY(-2px)',
+                },
               }}
             >
               <CardContent sx={{ textAlign: 'center', width: '100%', p: 6 }}>
@@ -151,8 +158,11 @@ export default function GamePage() {
                   sx={{
                     fontSize: '4rem',
                     fontWeight: 700,
-                    color: '#3b82f6',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
                     mb: 4,
+                    animation: 'scaleIn 0.5s ease-out',
                   }}
                 >
                   {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
@@ -171,8 +181,19 @@ export default function GamePage() {
                       width: '300px',
                       '& .MuiOutlinedInput-root': {
                         fontSize: '2rem',
+                        borderRadius: '12px',
+                        backgroundColor: '#ffffff',
+                        transition: 'all 0.3s ease',
                         '& input': {
                           textAlign: 'center',
+                          fontWeight: 600,
+                        },
+                        '&:hover': {
+                          borderColor: '#3b82f6',
+                          boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)',
+                        },
+                        '&.Mui-focused': {
+                          boxShadow: '0 4px 20px rgba(59, 130, 246, 0.3)',
                         },
                       },
                     }}
@@ -188,8 +209,19 @@ export default function GamePage() {
                       px: 6,
                       py: 2,
                       fontSize: '1.2rem',
-                      backgroundColor: '#3b82f6',
-                      '&:hover': { backgroundColor: '#2563eb' },
+                      fontWeight: 600,
+                      background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                      transition: 'all 0.3s ease',
+                      '&:hover': { 
+                        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 20px rgba(59, 130, 246, 0.4)',
+                      },
+                      '&:active': {
+                        transform: 'translateY(0)',
+                      },
                     }}
                   >
                     Submit
@@ -214,7 +246,20 @@ export default function GamePage() {
 
           {/* Progress Bar */}
           <Grid item xs={12} md={4}>
-            <Card elevation={3} sx={{ position: 'sticky', top: 20 }}>
+            <Card 
+              elevation={3} 
+              sx={{ 
+                position: 'sticky', 
+                top: 20,
+                borderRadius: '20px',
+                background: 'linear-gradient(135deg, #ffffff 0%, #fef3c7 100%)',
+                border: '2px solid #fde68a',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  boxShadow: '0 20px 40px rgba(251, 191, 36, 0.2)',
+                },
+              }}
+            >
               <CardContent sx={{ textAlign: 'center', p: 4 }}>
                 <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#1e293b' }}>
                   Daily Progress
@@ -228,6 +273,8 @@ export default function GamePage() {
                     thickness={5}
                     sx={{
                       color: progressPercentage === 100 ? '#22c55e' : '#3b82f6',
+                      filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.5))',
+                      transition: 'all 0.5s ease',
                     }}
                   />
                   <Box
@@ -276,15 +323,38 @@ export default function GamePage() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)' }}>
-      <Typography variant="h3" sx={{ mb: 4, fontWeight: 700, color: '#1e293b', textAlign: 'center' }}>
+    <Container maxWidth="lg" sx={{ py: 6, minHeight: 'calc(100vh - 200px)', animation: 'fadeIn 0.5s ease-in-out' }}>
+      <Typography 
+        variant="h3" 
+        sx={{ 
+          mb: 4, 
+          fontWeight: 700, 
+          textAlign: 'center',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}
+      >
         Math Practice Game
       </Typography>
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {Object.keys(settings).map((operation) => (
           <Grid item xs={12} sm={6} md={3} key={operation}>
-            <Card elevation={2} sx={{ height: '100%' }}>
+            <Card 
+              elevation={2} 
+              sx={{ 
+                height: '100%',
+                borderRadius: '16px',
+                transition: 'all 0.3s ease',
+                border: '2px solid transparent',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 12px 24px rgba(59, 130, 246, 0.2)',
+                  borderColor: '#3b82f6',
+                },
+              }}
+            >
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
                   <FormControlLabel
@@ -345,7 +415,14 @@ export default function GamePage() {
           sx={{
             display: 'inline-block',
             p: 4,
-            backgroundColor: '#f8fafc',
+            background: 'linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)',
+            borderRadius: '20px',
+            border: '2px solid #bfdbfe',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              boxShadow: '0 20px 40px rgba(59, 130, 246, 0.2)',
+              transform: 'translateY(-5px)',
+            },
           }}
         >
           <Box sx={{ mb: 3, position: 'relative', display: 'inline-flex' }}>
@@ -390,8 +467,18 @@ export default function GamePage() {
               py: 2,
               fontSize: '1.2rem',
               fontWeight: 600,
-              backgroundColor: '#3b82f6',
-              '&:hover': { backgroundColor: '#2563eb' },
+              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+              borderRadius: '12px',
+              boxShadow: '0 8px 16px rgba(59, 130, 246, 0.3)',
+              transition: 'all 0.3s ease',
+              '&:hover': { 
+                background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+                transform: 'translateY(-3px)',
+                boxShadow: '0 12px 24px rgba(59, 130, 246, 0.4)',
+              },
+              '&:active': {
+                transform: 'translateY(0)',
+              },
             }}
           >
             Start Daily Practice

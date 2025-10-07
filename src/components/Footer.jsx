@@ -11,11 +11,23 @@ export default function Footer() {
       component="footer"
       sx={{
         mt: "auto",
-        backgroundColor: "#1e293b",
+        background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
         color: "#e2e8f0",
         pt: 6,
         pb: 4,
         borderTop: "4px solid #3b82f6",
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)',
+        position: 'relative',
+        overflow: 'hidden',
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)',
+        },
       }}
     >
       <Container maxWidth="lg">
@@ -41,7 +53,9 @@ export default function Footer() {
               variant="h6"
               sx={{
                 fontWeight: 700,
-                color: "#3b82f6",
+                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
                 mb: 1,
                 fontSize: "1.5rem",
               }}
@@ -82,8 +96,23 @@ export default function Footer() {
                 underline="hover"
                 sx={{
                   color: "#94a3b8",
-                  transition: "color 0.2s",
-                  "&:hover": { color: "#3b82f6" },
+                  transition: "all 0.3s ease",
+                  position: 'relative',
+                  "&:hover": { 
+                    color: "#3b82f6",
+                    paddingLeft: '8px',
+                  },
+                  "&:before": {
+                    content: '"→"',
+                    position: 'absolute',
+                    left: -15,
+                    opacity: 0,
+                    transition: 'all 0.3s ease',
+                  },
+                  "&:hover:before": {
+                    left: -5,
+                    opacity: 1,
+                  },
                 }}
               >
                 About
@@ -93,8 +122,23 @@ export default function Footer() {
                 underline="hover"
                 sx={{
                   color: "#94a3b8",
-                  transition: "color 0.2s",
-                  "&:hover": { color: "#3b82f6" },
+                  transition: "all 0.3s ease",
+                  position: 'relative',
+                  "&:hover": { 
+                    color: "#3b82f6",
+                    paddingLeft: '8px',
+                  },
+                  "&:before": {
+                    content: '"→"',
+                    position: 'absolute',
+                    left: -15,
+                    opacity: 0,
+                    transition: 'all 0.3s ease',
+                  },
+                  "&:hover:before": {
+                    left: -5,
+                    opacity: 1,
+                  },
                 }}
               >
                 Practice
@@ -125,18 +169,37 @@ export default function Footer() {
               rel="noopener noreferrer"
               sx={{
                 display: "inline-block",
-                backgroundColor: "#3b82f6",
+                background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
                 color: "white",
                 textDecoration: "none",
-                borderRadius: "8px",
-                padding: "10px 24px",
+                borderRadius: "10px",
+                padding: "12px 28px",
                 fontSize: "14px",
                 fontWeight: 600,
-                transition: "all 0.2s",
+                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                transition: "all 0.3s ease",
+                position: 'relative',
+                overflow: 'hidden',
+                "&:before": {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                  transition: 'left 0.6s ease',
+                },
                 "&:hover": {
-                  backgroundColor: "#2563eb",
+                  background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
                   transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(59, 130, 246, 0.4)",
+                  boxShadow: "0 6px 16px rgba(59, 130, 246, 0.5)",
+                  "&:before": {
+                    left: '100%',
+                  },
+                },
+                "&:active": {
+                  transform: "translateY(0)",
                 },
               }}
             >
@@ -197,10 +260,12 @@ export default function Footer() {
               aria-label="Visit our GitHub"
               sx={{
                 color: "#94a3b8",
-                transition: "all 0.2s",
+                transition: "all 0.3s ease",
                 "&:hover": {
                   color: "#3b82f6",
-                  backgroundColor: "rgba(59, 130, 246, 0.1)",
+                  backgroundColor: "rgba(59, 130, 246, 0.15)",
+                  transform: 'translateY(-3px) rotate(5deg)',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
                 },
               }}
             >
@@ -212,10 +277,12 @@ export default function Footer() {
               aria-label="Send us an email"
               sx={{
                 color: "#94a3b8",
-                transition: "all 0.2s",
+                transition: "all 0.3s ease",
                 "&:hover": {
                   color: "#3b82f6",
-                  backgroundColor: "rgba(59, 130, 246, 0.1)",
+                  backgroundColor: "rgba(59, 130, 246, 0.15)",
+                  transform: 'translateY(-3px) rotate(-5deg)',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
                 },
               }}
             >
