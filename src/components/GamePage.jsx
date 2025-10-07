@@ -134,10 +134,6 @@ export default function GamePage() {
               {/* Problem Area - Takes up most of the space */}
               <Grid item xs={12} lg={7}>
                 <Box className="game-problem-section">
-                  <Typography variant="h6" className="game-problem-title">
-                    Problem #{problemsSolved + 1}
-                  </Typography>
-
                   <Typography variant="h1" className="game-math-problem">
                     {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
                   </Typography>
@@ -192,7 +188,6 @@ export default function GamePage() {
                   </Box>
 
                   <Typography variant="body1" className="game-progress-status">
-                    {problemsSolved === 0 && 'Let\'s get started!'}
                     {problemsSolved > 0 && problemsSolved < dailyGoal && 'Keep going!'}
                     {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
                   </Typography>
@@ -229,10 +224,10 @@ export default function GamePage() {
               </Grid>
             </Grid>
 
-            {/* Feedback Snackbar - Positioned relative to the single card */}
+            {/* Feedback Snackbar - Positioned at bottom to avoid covering elements */}
             <Snackbar
               open={showFeedback}
-              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
               <Alert
                 severity={isCorrect ? 'success' : 'error'}
