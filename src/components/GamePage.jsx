@@ -311,7 +311,7 @@ export default function GamePage() {
 
       <Grid container spacing={{ xs: 1.5, sm: 3 }} className="setup-grid">
         {Object.keys(settings).map((operation) => (
-          <Grid item xs={6} sm={6} md={3} key={operation}>
+          <Grid item xs={3} sm={3} md={3} key={operation}>
             <Card elevation={2} className="setup-card">
               <CardContent className="setup-card-content">
                 <Box className="setup-operation-header">
@@ -337,7 +337,7 @@ export default function GamePage() {
                           fontSize: { xs: '0.9rem', md: '1.25rem' }
                         }}
                       >
-                        {operation}
+                        {operation === 'ADD' ? '+' : operation === 'SUB' ? '-' : operation === 'MULT' ? '×' : '÷'}
                       </Typography>
                     }
                   />
