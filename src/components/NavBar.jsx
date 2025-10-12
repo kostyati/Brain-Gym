@@ -82,7 +82,7 @@ export default function NavBar() {
                 },
               }}
             >
-              brain CrossFit
+              Brain CrossFit
               <Box
                 component="span"
                 sx={{
