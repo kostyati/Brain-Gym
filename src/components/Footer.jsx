@@ -13,8 +13,8 @@ export default function Footer() {
         mt: "auto",
         background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
         color: "#e2e8f0",
-        pt: 6,
-        pb: 4,
+        pt: 3,
+        pb: 2,
         borderTop: "4px solid #3b82f6",
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.2)',
         position: 'relative',
@@ -38,8 +38,8 @@ export default function Footer() {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: { xs: "center", md: "flex-start" },
-            gap: { xs: 3, md: 4 },
-            mb: { xs: 3, md: 4 },
+            gap: { xs: 2, md: 3 },
+            mb: { xs: 2, md: 3 },
           }}
         >
           {/* Brand Section */}
@@ -61,7 +61,7 @@ export default function Footer() {
                 fontSize: { xs: "1.25rem", md: "1.5rem" },
               }}
             >
-              Brain Gym
+              brain CrossFit
             </Typography>
             <Typography
               variant="body2"
@@ -232,7 +232,7 @@ export default function Footer() {
           </Box>
         </Box>
 
-        <Divider sx={{ borderColor: "#334155", mb: 3 }} />
+        <Divider sx={{ borderColor: "#334155", mb: 2 }} />
 
         {/* Bottom Section */}
         <Box

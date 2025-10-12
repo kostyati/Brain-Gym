@@ -24,7 +24,7 @@ export default function AboutPage() {
             fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
           }}
         >
-          About Brain Gym Math
+          About brain CrossFit 
         </Typography>
 
         <Typography
@@ -36,7 +36,7 @@ export default function AboutPage() {
             fontSize: { xs: '0.9rem', sm: '1rem' }
           }}
         >
-          Welcome to Brain Gym Math! Sharpen your arithmetic skills with our interactive practice platform.
+          Welcome to Brain Corossfit! Sharpen your arithmetic skills with our interactive practice platform.
           Whether you're a student looking to build confidence, a parent helping with homework, or someone who wants to keep their mind agile.
           Our adaptive math exercises make learning engaging for all ages.
         </Typography>

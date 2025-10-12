@@ -268,15 +268,9 @@ button:active {
   transform: scale(0.98);
 }
 
-/* Input Styles Enhancement */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
+/* Input Styles Enhancement - Keep spinner arrows for number inputs */
 input[type="number"] {
-  -moz-appearance: textfield;
+  /* Don't hide the spinner arrows for setup input fields */
 }
 
 /* Loading State */
@@ -418,7 +412,6 @@ input[type="number"] {
 .game-container {
   padding: clamp(0.5rem, 4vw, 1.5rem);
   min-height: calc(100vh - 200px);
-  animation: fadeIn 0.5s ease-in-out;
 }
 
 .game-card {
@@ -432,10 +425,7 @@ input[type="number"] {
   flex-direction: column;
 }
 
-.game-card:hover {
-  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
-  transform: translateY(-2px);
-}
+/* Removed hover animation for less motion */
 
 .game-card-content {
   padding: clamp(1rem, 3vw, 2rem);
@@ -458,7 +448,6 @@ input[type="number"] {
 
 .game-math-problem {
   margin-bottom: clamp(0.75rem, 3vw, 1rem);
-  animation: scaleIn 0.5s ease-out;
   line-height: 1.1;
   font-size: clamp(1.8rem, 8vw, 4rem);
   font-weight: 700;
@@ -519,11 +508,7 @@ input[type="number"] {
   cursor: pointer;
 }
 
-.game-submit-button:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-}
+/* Removed hover animation for less motion */
 
 .game-submit-button:active {
   transform: translateY(0);

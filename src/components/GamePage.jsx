@@ -82,28 +82,84 @@ export default function GamePage() {
     const minVal = Math.min(Math.abs(min), Math.abs(max));
     const maxVal = Math.max(Math.abs(min), Math.abs(max));
 
-    let num1 = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
-    let num2 = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
-    let answer;
+    // Adjust ranges to avoid trivial problems
+    const adjustedMin = Math.max(minVal, 2); // Minimum 2 for all operations
+    const adjustedMax = Math.max(maxVal, adjustedMin + 1); // Ensure range for meaningful problems
 
+    let num1, num2, answer;
+    let attempts = 0;
+    const maxAttempts = 50; // Prevent infinite loops
+
+    do {
+      num1 = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
+      num2 = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
+
+      switch (operation) {
+        case 'ADD':
+          answer = num1 + num2;
+          // Avoid trivial addition: ensure both numbers >= 2 and sum > 4
+          if (num1 >= 2 && num2 >= 2 && answer > 4) {
+            return { num1, num2, operation: '+', answer, type: 'ADD' };
+          }
+          break;
+
+        case 'SUB':
+          // Ensure num1 >= num2 for positive results
+          if (num1 < num2) [num1, num2] = [num2, num1];
+          answer = num1 - num2;
+          // Avoid trivial subtraction: ensure difference >= 2 and both numbers >= 3
+          if (num1 >= 3 && num2 >= 2 && answer >= 2) {
+            return { num1, num2, operation: '-', answer, type: 'SUB' };
+          }
+          break;
+
+        case 'MULT':
+          answer = num1 * num2;
+          // Avoid trivial multiplication: ensure neither number is 0 or 1, and product > 4
+          if (num1 >= 2 && num2 >= 2 && answer > 4 && answer <= 100) {
+            return { num1, num2, operation: '×', answer, type: 'MULT' };
+          }
+          break;
+
+        case 'DIV':
+          // Ensure clean division with meaningful results
+          if (num2 <= 1) num2 = 2; // Avoid division by 0 or 1
+          answer = Math.floor(num1 / num2);
+          const originalNum1 = num1;
+          num1 = answer * num2; // Ensure clean division
+
+          // Avoid trivial division: ensure quotient >= 2 and both numbers are meaningful
+          if (answer >= 2 && num2 >= 2 && originalNum1 >= 4) {
+            return { num1, num2, operation: '÷', answer, type: 'DIV' };
+          }
+          break;
+      }
+
+      attempts++;
+    } while (attempts < maxAttempts);
+
+    // Fallback to ensure we always return a problem
     switch (operation) {
       case 'ADD':
+        num1 = Math.max(adjustedMin, 2);
+        num2 = Math.max(adjustedMin, 2);
         answer = num1 + num2;
         return { num1, num2, operation: '+', answer, type: 'ADD' };
       case 'SUB':
-        // Ensure num1 >= num2 for positive results
+        num1 = Math.max(adjustedMin, 4);
+        num2 = Math.max(adjustedMin, 2);
         if (num1 < num2) [num1, num2] = [num2, num1];
         answer = num1 - num2;
         return { num1, num2, operation: '-', answer, type: 'SUB' };
       case 'MULT':
+        num1 = Math.max(adjustedMin, 2);
+        num2 = Math.max(adjustedMin, 2);
         answer = num1 * num2;
         return { num1, num2, operation: '×', answer, type: 'MULT' };
       case 'DIV':
-        // Ensure clean division: answer is num1/num2, so we multiply answer by num2 to get num1
-        // Avoid division by zero
-        if (num2 === 0) num2 = 1;
-        answer = num1;
-        num1 = num1 * num2;
+        num2 = Math.max(adjustedMin, 2);
+        answer = Math.max(2, Math.floor(adjustedMin / num2));
+        num1 = answer * num2;
         return { num1, num2, operation: '÷', answer, type: 'DIV' };
       default:
         return null;
@@ -171,115 +227,101 @@ export default function GamePage() {
         {/* Single Combined Card */}
         <Card elevation={3} className="game-card">
           <CardContent className="game-card-content">
-            <Grid container spacing={{ xs: 3, sm: 4, md: 4 }}>
-              {/* Problem Area - Takes up most of the space */}
-            <Grid item xs={12} lg={7}>
-                <Box className="game-problem-section" role="main" aria-label="Math problem section">
-                  <Typography
-                    variant="h1"
-                    className="game-math-problem"
-                    aria-live="polite"
-                    aria-describedby="problem-description"
-                  >
-                    {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
-                  </Typography>
-                  <Box id="problem-description" className="sr-only">
-                    Math problem: {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} equals what?
-                  </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', textAlign: 'center' }}>
+              {/* Math Problem */}
+              <Typography
+                variant="h1"
+                className="game-math-problem"
+                aria-live="polite"
+                aria-describedby="problem-description"
+                sx={{ mb: 3 }}
+              >
+                {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
+              </Typography>
+              <Box id="problem-description" className="sr-only">
+                Math problem: {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} equals what?
+              </Box>
 
-                  <Box className="game-input-section">
-                    <TextField
-                      type="number"
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      placeholder="Your answer"
-                      autoFocus
-                      key={`input-${problemsSolved}`}
-                      className="game-input-field"
-                      inputProps={{
-                        'aria-label': 'Enter your answer',
-                        'aria-describedby': 'input-help'
-                      }}
-                    />
-                    <Box id="input-help" className="sr-only">
-                      Input field for math problem answer. Press Enter or tap Submit button to check your answer.
-                    </Box>
-                    <Button
-                      onClick={handleSubmitAnswer}
-                      variant="contained"
-                      size="large"
-                      className="game-submit-button"
-                      aria-label="Submit answer"
-                    >
-                      Submit
-                    </Button>
+              {/* Answer Input */}
+              <Box className="game-input-section" sx={{ mb: 3 }}>
+                <TextField
+                  type="number"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Your answer"
+                  autoFocus
+                  key={`input-${problemsSolved}`}
+                  className="game-input-field"
+                  inputProps={{
+                    'aria-label': 'Enter your answer',
+                    'aria-describedby': 'input-help'
+                  }}
+                />
+                <Box id="input-help" className="sr-only">
+                  Input field for math problem answer. Press Enter or tap Submit button to check your answer.
+                </Box>
+              </Box>
+
+              {/* Action Buttons */}
+              <Box className="game-button-group" sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 4 }}>
+                <Button
+                  onClick={handleSubmitAnswer}
+                  variant="contained"
+                  size="large"
+                  className="game-submit-button"
+                  aria-label="Submit answer"
+                >
+                  Submit
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  onClick={() => {
+                    setGameStarted(false);
+                    setCurrentProblem(null);
+                    setUserAnswer('');
+                    setProblemsSolved(0);
+                    setShowFeedback(false);
+                    setIsCorrect(false);
+                  }}
+                  className="game-restart-button"
+                >
+                  Reset
+                </Button>
+              </Box>
+
+              {/* Progress Section */}
+              <Box className="game-progress-section">
+                <Typography variant="h6" className="game-progress-title" sx={{ mb: 2 }}>
+                  Daily Progress
+                </Typography>
+
+                <Box
+                  className="game-progress-circle"
+                  sx={{ mb: 2 }}
+                >
+                  <CircularProgress
+                    variant="determinate"
+                    value={progressPercentage}
+                    size={{ xs: 100, md: 140 }}
+                    thickness={6}
+                  />
+                  <Box className="game-progress-text">
+                    <Typography variant="h3" className="game-progress-number">
+                      {problemsSolved}
+                    </Typography>
+                    <Typography variant="body2" className="game-progress-label">
+                      / {dailyGoal}
+                    </Typography>
                   </Box>
                 </Box>
-              </Grid>
 
-              {/* Progress Bar - Sidebar within the same card */}
-              <Grid item xs={12} lg={5}>
-                <Box className="game-progress-section">
-                  <Typography variant="h6" className="game-progress-title">
-                    Daily Progress
-                  </Typography>
-
-                  <Box
-                    className={`game-progress-circle ${progressPercentage === 100 ? 'completed' : ''}`}
-                  >
-                    <CircularProgress
-                      variant="determinate"
-                      value={progressPercentage}
-                      size={{ xs: 100, md: 140 }}
-                      thickness={6}
-                    />
-                    <Box className="game-progress-text">
-                      <Typography variant="h3" className="game-progress-number">
-                        {problemsSolved}
-                      </Typography>
-                      <Typography variant="body2" className="game-progress-label">
-                        / {dailyGoal}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Typography variant="body1" className="game-progress-status">
-                    {problemsSolved > 0 && problemsSolved < dailyGoal && 'Keep going!'}
-                    {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
-                  </Typography>
-
-                  <Box className="game-button-group">
-                    {/* Restart Button - Always visible during game */}
-                    <Button
-                      variant="outlined"
-                      onClick={() => {
-                        setGameStarted(false);
-                        setCurrentProblem(null);
-                        setUserAnswer('');
-                        setProblemsSolved(0);
-                        setShowFeedback(false);
-                        setIsCorrect(false);
-                      }}
-                      className="game-restart-button"
-                    >
-                      Restart
-                    </Button>
-
-                    {/* Back to Settings Button - Only visible when goal completed */}
-                    {problemsSolved >= dailyGoal && (
-                      <Button
-                        variant="contained"
-                        onClick={() => setGameStarted(false)}
-                        className="game-back-button"
-                      >
-                        Back to Settings
-                      </Button>
-                    )}
-                  </Box>
-                </Box>
-              </Grid>
-            </Grid>
+                <Typography variant="body1" className="game-progress-status">
+                  {problemsSolved >= dailyGoal && '🎉 Goal completed!'}
+                </Typography>
+              </Box>
+            </Box>
 
             {/* Feedback Snackbar - Positioned at bottom to avoid covering elements */}
             <Snackbar
@@ -349,18 +391,36 @@ export default function GamePage() {
                     type="number"
                     size="small"
                     value={settings[operation].min}
-                    onChange={(e) => handleSettingChange(operation, 'min', e.target.value)}
+                    onChange={(e) => {
+                      const value = Math.min(parseInt(e.target.value) || 0, 9999);
+                      handleSettingChange(operation, 'min', Math.max(0, value));
+                    }}
                     disabled={!settings[operation].enabled}
                     className="setup-input-field"
+                    inputProps={{
+                      min: 0,
+                      max: 9999,
+                      style: { maxWidth: '80px' }
+                    }}
+                    sx={{ maxWidth: '100px' }}
                   />
                   <TextField
                     label="Max"
                     type="number"
                     size="small"
                     value={settings[operation].max}
-                    onChange={(e) => handleSettingChange(operation, 'max', e.target.value)}
+                    onChange={(e) => {
+                      const value = Math.min(parseInt(e.target.value) || 0, 9999);
+                      handleSettingChange(operation, 'max', Math.max(0, value));
+                    }}
                     disabled={!settings[operation].enabled}
                     className="setup-input-field"
+                    inputProps={{
+                      min: 0,
+                      max: 9999,
+                      style: { maxWidth: '80px' }
+                    }}
+                    sx={{ maxWidth: '100px' }}
                   />
                 </Box>
 

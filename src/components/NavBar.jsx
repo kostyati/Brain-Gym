@@ -15,13 +15,24 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    // Clear any existing game state from localStorage to ensure fresh start
+    localStorage.removeItem('brainGymSettings');
+    localStorage.removeItem('brainGymProgress');
+    localStorage.removeItem('brainGymDate');
+    // Force page reload to ensure clean state
+    window.location.href = '/';
   };
 
   const navItems = [
@@ -52,8 +63,8 @@ export default function NavBar() {
             {/* Logo/Brand */}
             <Typography
               variant="h6"
-              component={Link}
-              to="/"
+              component="div"
+              onClick={handleLogoClick}
               sx={{
                 fontWeight: 700,
                 fontSize: "1.5rem",
@@ -64,13 +75,14 @@ export default function NavBar() {
                 display: "flex",
                 alignItems: "center",
                 gap: 0.5,
+                cursor: "pointer",
                 transition: "all 0.3s ease",
                 "&:hover": {
                   transform: 'scale(1.05)',
                 },
               }}
             >
-              Brain Gym
+              brain CrossFit
               <Box
                 component="span"
                 sx={{
