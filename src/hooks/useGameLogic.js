@@ -20,6 +20,8 @@ export function useGameLogic() {
   const [problemsSolved, setProblemsSolved] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [showKeyboardHint, setShowKeyboardHint] = useState(false);
+  const [firstAnswerSubmitted, setFirstAnswerSubmitted] = useState(false);
 
   // Game constants
   const dailyGoal = 20;
@@ -183,6 +185,9 @@ export function useGameLogic() {
     setCurrentProblem(generateProblem());
     setProblemsSolved(0);
     setUserAnswer('');
+    setFirstAnswerSubmitted(false);
+    // Show keyboard hint for first-time users
+    setShowKeyboardHint(true);
   };
 
   /**
@@ -209,7 +214,15 @@ export function useGameLogic() {
     } else {
       setIsCorrect(false);
       setShowFeedback(true);
+      // Clear the incorrect answer so user can immediately type a new one
+      setUserAnswer('');
       setTimeout(() => setShowFeedback(false), 2000);
+    }
+
+    // Hide keyboard hint after first answer is submitted
+    if (!firstAnswerSubmitted) {
+      setFirstAnswerSubmitted(true);
+      setShowKeyboardHint(false);
     }
   };
 
@@ -236,6 +249,8 @@ export function useGameLogic() {
     problemsSolved,
     showFeedback,
     isCorrect,
+    showKeyboardHint,
+    firstAnswerSubmitted,
 
     // Constants
     dailyGoal,

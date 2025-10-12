@@ -8,8 +8,6 @@ import {
   CardContent,
   Box,
   CircularProgress,
-  Snackbar,
-  Alert,
 } from '@mui/material';
 import { CheckCircle, Cancel } from '@mui/icons-material';
 
@@ -27,7 +25,9 @@ export default function GamePlay({
   problemsSolved,
   dailyGoal,
   showFeedback,
-  isCorrect
+  isCorrect,
+  showKeyboardHint,
+  firstAnswerSubmitted
 }) {
   /**
    * Handle keyboard input for answer submission
@@ -44,6 +44,43 @@ export default function GamePlay({
 
   return (
     <Container maxWidth="lg" className="game-container">
+      {/* Keyboard Hint Message - Positioned to the right of problem */}
+      {showKeyboardHint && (
+        <Box
+          className="keyboard-hint"
+          sx={{
+            position: 'absolute',
+            top: { xs: '50%', md: '50%' },
+            right: { xs: '20px', md: '40px' },
+            transform: { xs: 'translateY(-50%)', md: 'translateY(-50%)' },
+            background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+            color: 'white',
+            padding: { xs: '16px 24px', md: '20px 32px' },
+            borderRadius: '16px',
+            boxShadow: '0 8px 24px rgba(59, 130, 246, 0.4)',
+            fontSize: { xs: '1.1rem', md: '1.3rem' },
+            fontWeight: 600,
+            zIndex: 1000,
+            maxWidth: { xs: '280px', md: '320px' },
+            textAlign: 'center',
+            animation: 'fadeIn 0.5s ease-in-out, pulse 2s ease-in-out 0.5s infinite',
+            border: '2px solid rgba(255, 255, 255, 0.3)',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: '50%',
+              left: { xs: '-8px', md: '-10px' },
+              transform: 'translateY(-50%)',
+              borderRight: '10px solid #3b82f6',
+              borderTop: '8px solid transparent',
+              borderBottom: '8px solid transparent',
+            }
+          }}
+        >
+          ⌨️ Type your answer & press Enter!
+        </Box>
+      )}
+
       <Card elevation={3} className="game-card">
         <CardContent className="game-card-content">
           <Box sx={{
@@ -54,20 +91,45 @@ export default function GamePlay({
             width: '100%',
             textAlign: 'center'
           }}>
-            {/* Math Problem Display */}
-            <Typography
-              variant="h1"
-              className="game-math-problem"
-              aria-live="polite"
-              aria-describedby="problem-description"
-              sx={{ mb: 3 }}
-            >
-              {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
-            </Typography>
+            {/* Math Problem Display with Feedback Icons */}
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 2,
+              mb: 3,
+              flexWrap: 'wrap'
+            }}>
+              {/* Feedback Icon */}
+              {showFeedback && (
+                <Box
+                  component={isCorrect ? CheckCircle : Cancel}
+                  className={`game-feedback-icon ${isCorrect ? 'correct' : 'incorrect'}`}
+                  sx={{
+                    fontSize: { xs: '2rem', md: '3rem' },
+                  }}
+                />
+              )}
+
+              {/* Math Problem */}
+              <Typography
+                variant="h1"
+                className="game-math-problem"
+                aria-live="polite"
+                aria-describedby="problem-description"
+                sx={{
+                  transition: 'all 0.3s ease',
+                  transform: showFeedback ? 'scale(1.02)' : 'scale(1)',
+                }}
+              >
+                {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} = ?
+              </Typography>
+            </Box>
 
             {/* Screen Reader Description */}
             <Box id="problem-description" className="sr-only">
               Math problem: {currentProblem.num1} {currentProblem.operation} {currentProblem.num2} equals what?
+              {showFeedback && (isCorrect ? ' Correct answer!' : ' Incorrect answer, try again.')}
             </Box>
 
             {/* Answer Input Section */}
@@ -145,23 +207,6 @@ export default function GamePlay({
               </Typography>
             </Box>
           </Box>
-
-          {/* Feedback Snackbar */}
-          <Snackbar
-            open={showFeedback}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          >
-            <Alert
-              severity={isCorrect ? 'success' : 'error'}
-              icon={isCorrect ? <CheckCircle /> : <Cancel />}
-              sx={{
-                fontSize: { xs: '1rem', md: '1.2rem' },
-                minWidth: { xs: '280px', md: 'auto' }
-              }}
-            >
-              {isCorrect ? '🎉 Correct! Great job!' : '❌ Not quite. Try again!'}
-            </Alert>
-          </Snackbar>
         </CardContent>
       </Card>
     </Container>

@@ -27,6 +27,8 @@ export default function GamePage() {
       dailyGoal={gameLogic.dailyGoal}
       showFeedback={gameLogic.showFeedback}
       isCorrect={gameLogic.isCorrect}
+      showKeyboardHint={gameLogic.showKeyboardHint}
+      firstAnswerSubmitted={gameLogic.firstAnswerSubmitted}
     />
   ) : (
     <GameSettings
